@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FormularioMapper">
+	<resultMap type="pe.com.swilveis.ws.entity.Formulario" id="formularioResulMap">
+		<result property="idFormulario" column="id_formulario" />
+		<result property="idTipoFormulario" column="id_tipo_formulario" />
+		<result property="nombreArchivo" column="nombre_archivo" />
+		<result property="fhIns" column="fh_ins" />
+		
+		<association property="usuario" resultMap="UsuarioMapper.usuarioResulMap" columnPrefix="usuario_"></association>
+		<association property="persona" resultMap="PersonaMapper.personaResulMap" columnPrefix="persona_"></association>
+	</resultMap>
+	
+	<resultMap type="pe.com.swilveis.ws.dto.ListarFormularioResponse" id="listarFormularioResulMap">
+		<result property="cantidadFormulario" column="cantidad_formulario" />
+		<result property="cantidadPersona" column="cantidad_persona" />
+		
+		<collection property="formularioList" resultMap="formularioResulMap"></collection>
+	</resultMap>
+	
+	<select id="insertar" resultMap="UtilMapper.confirmacionResulMap">
+		select * from fn_insert_formulario(#{json});
+	</select>
+	
+	<select id="listar" resultMap="listarFormularioResulMap">
+		select * from fn_select_formulario(#{idUsuario}, #{fechaInicio}, #{fechaFin});
+	</select>
+	
+</mapper>

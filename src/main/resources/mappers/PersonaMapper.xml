@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonaMapper">
+	<resultMap type="pe.com.swilveis.ws.entity.Persona" id="personaResulMap">
+		<result property="idPersona" column="id_persona" />
+		<result property="ruc" column="ruc" />
+		<result property="razonSocial" column="razon_social" />
+		<result property="nombreApellido" column="nombre_apellido" />
+		<result property="dni" column="dni" />
+		<result property="giroActividad" column="giro_actividad" />
+		<result property="direcionLocal" column="direcion_local" />		
+		<result property="departamento" column="departamento" />
+		<result property="provincia" column="provincia" />
+		<result property="distrito" column="distrito" />
+		<result property="areaLocal" column="area_local" />
+		<result property="horarioInicio" column="horario_inicio" />
+		<result property="horarioFin" column="horario_fin" />
+		<result property="pisoLocal" column="piso_local" />
+		<result property="telefono" column="telefono" />
+		<result property="correo" column="correo" />
+		<result property="tipoPersona" column="tipo_persona" />
+		<result property="licenciaIndeterminada" column="licencia_indeterminada" />
+		<result property="especificarNo" column="especificra_no" />
+		<result property="riesgoLocal" column="riesgo_local" />
+		<result property="numLicFuncionamiento" column="num_lic_funcionamineto"/>
+		<result property="numSunarp" column="num_sunarp"/>
+		<result property="restaurante" column="restaurante"/>
+		<result property="cantidadExtintores" column="cantidad_extintores"/>
+	</resultMap>
+	
+	<select id="obtenerPersona" resultMap="personaResulMap">
+		select * from fn_select_persona(#{ruc});
+	</select>
+	
+	<select id="insertarPersona" resultMap="UtilMapper.confirmacionResulMap">
+		select * from fn_insert_persona(#{personajson});
+	</select>
+	
+</mapper>

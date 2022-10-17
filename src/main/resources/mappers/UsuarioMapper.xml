@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsuarioMapper">
+	<resultMap type="pe.com.swilveis.ws.entity.Usuario" id="usuarioResulMap">
+		<result property="idUsuario" column="id_usuario" />
+		<result property="nombreUsuario" column="nombre_usuario" />
+		<result property="password" column="password" />
+		<result property="nombre" column="nombre" />
+		<result property="email" column="email" />
+		<result property="idRol" column="id_rol" />
+		<result property="estado" column="estado" />
+	</resultMap>
+	
+	<select id="obtener" resultMap="usuarioResulMap">
+		select * from fn_select_usuario(#{nombreUsuario});
+	</select>
+	
+	<select id="insertar" resultMap="UtilMapper.confirmacionResulMap">
+		select * from fn_insert_usuario(#{json});
+	</select>
+	
+	<select id="listar" resultMap="usuarioResulMap">
+		select * from fn_select_usuario(#{nombreUsuario}, #{nombre}, #{idRol}, #{estado});
+	</select>
+	
+	<select id="actualizarEstado" resultMap="UtilMapper.confirmacionResulMap">
+		select * from fn_update_estado_usuario(#{idUsuario}, #{estado});
+	</select>
+	
+</mapper>
